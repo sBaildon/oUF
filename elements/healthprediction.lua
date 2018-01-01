@@ -108,6 +108,14 @@ local function Update(self, event, unit)
 	local hasOverHealAbsorb = false
 	if(health < healAbsorb) then
 		hasOverHealAbsorb = true
+		local reduction = healAbsorb - health
+		if(allIncomingHeal > reduction) then
+			myIncomingHeal = myIncomingHeal * (allIncomingHeal - reduction) / allIncomingHeal
+			allIncomingHeal = allIncomingHeal - reduction
+		else
+			allIncomingHeal = 0
+			myIncomingHeal = 0
+		end
 		healAbsorb = health
 	end
 
