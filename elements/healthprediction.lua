@@ -30,11 +30,18 @@ A default texture will be applied to the Texture widgets if they don't have a te
 
 ## Examples
 
-    -- Position and size
+	-- Position and size
+    local healAbsorbBar = CreateFrame('StatusBar', nil, self.Health)
+    healAbsorbBar:SetPoint('TOP')
+    healAbsorbBar:SetPoint('BOTTOM')
+    healAbsorbBar:SetPoint('RIGHT', self.Health:GetStatusBarTexture())
+    healAbsorbBar:SetWidth(200)
+    healAbsorbBar:SetReverseFill(true)
+
     local myBar = CreateFrame('StatusBar', nil, self.Health)
     myBar:SetPoint('TOP')
     myBar:SetPoint('BOTTOM')
-    myBar:SetPoint('LEFT', self.Health:GetStatusBarTexture(), 'RIGHT')
+    myBar:SetPoint('LEFT', healAbsorbBar:GetStatusBarTexture())
     myBar:SetWidth(200)
 
     local otherBar = CreateFrame('StatusBar', nil, self.Health)
@@ -48,13 +55,6 @@ A default texture will be applied to the Texture widgets if they don't have a te
     absorbBar:SetPoint('BOTTOM')
     absorbBar:SetPoint('LEFT', otherBar:GetStatusBarTexture(), 'RIGHT')
     absorbBar:SetWidth(200)
-
-    local healAbsorbBar = CreateFrame('StatusBar', nil, self.Health)
-    healAbsorbBar:SetPoint('TOP')
-    healAbsorbBar:SetPoint('BOTTOM')
-    healAbsorbBar:SetPoint('RIGHT', self.Health:GetStatusBarTexture())
-    healAbsorbBar:SetWidth(200)
-    healAbsorbBar:SetReverseFill(true)
 
     local overAbsorb = self.Health:CreateTexture(nil, "OVERLAY")
     overAbsorb:SetPoint('TOP')
@@ -133,12 +133,6 @@ local function Update(self, event, unit)
 		else
 			absorb = math.max(0, maxHealth - health)
 		end
-	end
-
-	if(healAbsorb > allIncomingHeal) then
-		healAbsorb = healAbsorb - allIncomingHeal
-	else
-		healAbsorb = 0
 	end
 
 	if(element.myBar) then
