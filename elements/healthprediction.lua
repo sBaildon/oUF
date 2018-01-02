@@ -131,16 +131,12 @@ local function Update(self, event, unit)
 	end
 
 	local hasOverAbsorb = false
-	if(health - healAbsorb + allIncomingHeal + absorb >= maxHealth or health + absorb >= maxHealth) then
+	if(health - healAbsorb + allIncomingHeal + absorb >= maxHealth) then
 		if(absorb > 0) then
 			hasOverAbsorb = true
 		end
 
-		if(allIncomingHeal > healAbsorb) then
-			absorb = math.max(0, maxHealth - (health - healAbsorb + allIncomingHeal))
-		else
-			absorb = math.max(0, maxHealth - health)
-		end
+		absorb = math.max(0, maxHealth - (health - healAbsorb + allIncomingHeal))
 	end
 
 	if(element.myBar) then
