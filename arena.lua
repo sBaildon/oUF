@@ -33,7 +33,7 @@ local function updateElement(self, event, element, specID)
 		if(el.colorPower and element == 'Power') then
 			-- FIXME: no idea if we can get power type here without the unit
 		elseif(el.colorClass) then
-			local _, _, _, _, _, _, class = GetSpecializationInfoByID(specID)
+			local _, _, _, _, _, class = GetSpecializationInfoByID(specID)
 			t = self.colors.class[class]
 		elseif(el.colorReaction) then
 			t = self.colors.reaction[2]
